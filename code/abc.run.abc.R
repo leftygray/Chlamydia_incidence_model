@@ -2,6 +2,10 @@
 
 ### For help: email: dr.ewan.cameron@gmail.com
 
+# Initilize
+setwd("C:/Users/Rgray/Documents/Research/!Evaluation_Modelling/evaluation_models/chlamydia_model/code")
+source("load.library.R")
+
 ### load key modules
 source("abc.read.in.data.R") # this will generate a report of 16 "errors" which may be ignored (these errors are due to the missing data in the 2007-2008 test counts)
 source("abc.read.in.hyperparameters.R")
@@ -25,15 +29,17 @@ max.repeat.count <- 200 # maximum number of times to feasibly run the MCMC kerne
 
 ### simulate from prior for first round of ABC
 for (i in 1:(1/(1-first.round.discard.fraction))) {
-theta <- simulate.from.prior(Nsim)
-simulated.population <- simulate.chlamydia(theta)
-epsilon.current <- compute.summary.stats(simulated.population)
-cat(i,"\n")
-if (i==1) {theta.save <- theta[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))],]
-epsilon.current.save <- epsilon.current[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))]]} else {
-theta.save <- rbind(theta.save,theta[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))],])
-epsilon.current.save <- c(epsilon.current.save,epsilon.current[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))]])
-}}
+  theta <- simulate.from.prior(Nsim)
+  simulated.population <- simulate.chlamydia(theta)
+  epsilon.current <- compute.summary.stats(simulated.population)
+  cat(i,"\n")
+  if (i==1) {
+    theta.save <- theta[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))],]
+    epsilon.current.save <- epsilon.current[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))]]} else {
+    theta.save <- rbind(theta.save,theta[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))],])
+    epsilon.current.save <- c(epsilon.current.save,epsilon.current[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))]])
+  }
+}
 
 theta <- theta.save
 epsilon.current <- epsilon.current.save

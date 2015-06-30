@@ -3,11 +3,17 @@
 ### Supposes existence of a subdirectory called 'data'
 
 ### Required package
-library(xlsx) # (available from online R archive: CRAN)
+# library(xlsx) # (available from online R archive: CRAN)
+
+# Use a different library for reading in excel files so rJava is 
+# not required
+load.library("readxl") 
 
 ## (1) ABS population estimates by (single-year) age & sex
 
-population.data <- read.xlsx("data/population.xlsx",sheetIndex=1,colIndex=c(1:202),rowIndex=c(1:13),header=F) # my file = years: 2001-2013
+# population.data <- read.xlsx("data/population.xlsx",sheetIndex=1,colIndex=c(1:202),rowIndex=c(1:13),header=F)
+# my file = years: 2001-2013
+population.data <- read_excel("data/population.xlsx", col_names = FALSE)
 
 nyears <- dim(population.data)[1]+1 # Defines a global variable used throughout
 
@@ -43,7 +49,9 @@ f.35.plus <- rowSums(f.population[,36:101])
 m.0.14 <- c(m.0.14,m.0.14[12]); m.15.19 <- c(m.15.19,m.15.19[12]); m.20.24 <- c(m.20.24,m.20.24[12]); m.25.29 <- c(m.25.29,m.25.29[12]); m.30.34 <- c(m.30.34,m.30.34[12]); m.35.plus <- c(m.35.plus,m.35.plus[12]); f.0.14 <- c(f.0.14,f.0.14[12]); f.15.19 <- c(f.15.19,f.15.19[12]); f.20.24 <- c(f.20.24,f.20.24[12]); f.25.29 <- c(f.25.29,f.25.29[12]); f.30.34 <- c(f.30.34,f.30.34[12]); f.35.plus <- c(f.35.plus,f.35.plus[12])
 
 ## (2) NNDSS notification and test counts for our fixed age & sex cohorts
-nndss.data <- read.xlsx("data/notifications.xlsx",sheetIndex=1,colIndex=c(1:66),header=F) # my file = years: 2001-2012 # 2006 & 2007: missing test counts
+# my file = years: 2001-2012 # 2006 & 2007: missing test counts
+# nndss.data <- read.xlsx("data/notifications.xlsx",sheetIndex=1,colIndex=c(1:66),header=F) 
+nndss.data <- read_excel("data/notifications.xlsx", col_names = FALSE)
 
 ## Notification counts available for 0-14/15-19/20-24/25-29/30-34/35+
 notifications.m <- matrix(as.numeric(t(as.matrix(nndss.data[4:15,1:6]))),nrow=6) # this manipulation is needed because R reads this data initially as character strings (owing to the missing entries in the testing data)
