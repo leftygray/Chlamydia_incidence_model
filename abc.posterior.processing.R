@@ -1,15 +1,26 @@
 ### R script to run the simulation algorithm a few more times to make posterior estimates of notification and test counts, incidence counts and fractions, positivity, & prevalence: we could save these during runtime of the original SMC-ABC algorithm (abc.run.abc.R) but that's a bit of a waste of time in my opinion
 
+
+# User specified utput folder and file for processing
+outputData <- "2015-07-01 17-00-35"  # User specified date folder
+fileNumber <- 55                     # User specifiied file number
+
+# Run main script ---------------------------------------------------------------
+
 # Load universal functions
-source("load.library.R")
+source("code/load.library.R")
 
 ### load key modules
-source("abc.read.in.data.R") # this will generate a report of 16 "errors" which may be ignored (these errors are due to the missing data in the 2007-2008 test counts)
-source("abc.read.in.hyperparameters.R")
-source("abc.simulate.chlamydia.R")
-source("abc.compute.summary.stats.R")
+source("code/abc.read.in.data.R") # this will generate a report of 16 "errors" which may be ignored (these errors are due to the missing data in the 2007-2008 test counts)
+source("code/abc.read.in.hyperparameters.R")
+source("code/abc.simulate.chlamydia.R")
+source("code/abc.compute.summary.stats.R")
 
-load("output/theta.test.55.dat") # set the number here to that of the final output run
+# Load output file
+outputFolder <-file.path(getwd(),"output",outputData)
+load(file.path(outputFolder, paste("theta.test.",toString(fileNumber),".dat",sep = "")))
+
+# Script parameters     
 epsilon.thresh <- median(epsilon.current)
 Nsim <- length(epsilon.current)
 
@@ -134,7 +145,7 @@ while (sum(required) > 6) { ### this loop may take a while ... it'll do the easy
 # save the simplified output in a file called 'posterior.dat'
 save(mock.not.m,mock.not.f,mock.test.m,mock.test.f,mock.inc.m,mock.inc.f,
      mock.incper.m,mock.incper.f,mock.prev.m,mock.prev.f,mock.pos.m,mock.pos.f,
-     theta,file="output/posterior.dat") 
+     theta,file="outputFolder/posterior.dat") 
 
 
 is.weights <- dbeta(theta[,1],4000,420)/dbeta(theta[,1],207,22)*dbeta(theta[,5],1500,8)/dbeta(theta[,5],150,1)*dbeta(theta[,9],1050,10000)/dbeta(theta[,9],29,290)

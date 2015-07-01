@@ -17,7 +17,11 @@ source("code/abc.build.mean.cov.matrices.R")
 source("code/abc.sample.from.proposal.R")
 source("code/abc.proposal.log.density.R")
 
-### Supposes existence of a subdirectory called 'output'
+### Create 'output' folder and a subfolder of date and time to store each set of runs
+dir.create(file.path(getwd(),"output"))
+currTime <- format(Sys.time(), "%Y-%m-%d %H-%M-%S") # Current time of run
+dir.create(file.path(getwd(),"output",currTime))
+outputFolder <- file.path(getwd(),"output",currTime)
 
 ### SMC-ABC control parameters
 Nsim <- 5000 # number of desired draws from the posterior
@@ -77,7 +81,7 @@ while (repeat.count < max.repeat.count) {
   output.thresh <- quantile(epsilon.current,1-discard.fraction)
   p.acc <- n.accepted/repeat.count/Nsim
   repeat.count <- max(1,as.integer(log(1-target.refreshment.rate)/log(1-p.acc)))
-  save(theta,epsilon.current,log.theta.prior.density,mean.cov,file=paste("output/theta.test.",count,".dat",sep=""))
+  save(theta,epsilon.current,log.theta.prior.density,mean.cov,file=paste(outputFolder,"/theta.test.",count,".dat",sep=""))
   count <- count + 1
   
 }
