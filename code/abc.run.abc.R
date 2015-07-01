@@ -36,9 +36,9 @@ for (i in 1:(1/(1-first.round.discard.fraction))) {
   if (i==1) {
     theta.save <- theta[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))],]
     epsilon.current.save <- epsilon.current[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))]]} else {
-    theta.save <- rbind(theta.save,theta[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))],])
-    epsilon.current.save <- c(epsilon.current.save,epsilon.current[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))]])
-  }
+      theta.save <- rbind(theta.save,theta[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))],])
+      epsilon.current.save <- c(epsilon.current.save,epsilon.current[sort.list(epsilon.current)[1:(Nsim*(1-first.round.discard.fraction))]])
+    }
 }
 
 theta <- theta.save
@@ -48,35 +48,37 @@ output.thresh <- quantile(epsilon.current,1-discard.fraction)
 count <- 1
 ## Run SMC-ABC until the efficiency of the MCMC refreshment kernel falls too low (i.e., when the expected number of repeat.count required to achieve the target.refreshment.rate exceeds max.repeat.count)
 while (repeat.count < max.repeat.count) {
-cat("SMC ABC Round ",count,", Threshold = ",output.thresh,", N[kernel] = ",repeat.count,"\n") ## watch the threshold convergence towards zero (though it'll probably stop well before then) ... for the discrepancy distance currently defined the output.thresh here can be taken as a mean fractional predictive error when divided by the size of the parameter space (i.e., frac.err = output.thresh/(9+nyears*6*2+nyears*4*2)) ... should be able to get frac.err < 0.1 at least in a few hours of runtime (e.g., leave it overnight) on a standard laptop
-
-resampled <- sample(which(epsilon.current < output.thresh),Nsim,replace=T)
-theta <- theta[resampled,]
-log.theta.prior.density <- log.prior.density(theta)
-
-mean.cov <- build.mean.cov.matrices(theta)
-log.theta.proposal.density <- log.proposal.density(theta,mean.cov)
-
-n.accepted <- 0
-
-for (i in 1:repeat.count) {
-
-proposal.list <- simulate.from.proposal(Nsim,mean.cov)
-log.proposal.density.new <- log.proposal.density(proposal.list,mean.cov)
-log.proposal.prior.density <- log.prior.density(proposal.list)
-proposal.epsilon <- compute.summary.stats(simulate.chlamydia(proposal.list))
-
-accepted.moves <- which(proposal.epsilon < output.thresh & log(runif(Nsim,0,1)) < log.proposal.prior.density - log.theta.prior.density + log.theta.proposal.density - log.proposal.density.new)
-n.accepted <- n.accepted + length(accepted.moves)
-non.accepted.moves <- which(!(1:Nsim %in% accepted.moves))
-
-theta <- rbind(proposal.list[accepted.moves,],theta[non.accepted.moves,])
-log.theta.prior.density <- c(log.proposal.prior.density[accepted.moves],log.theta.prior.density[non.accepted.moves])
-epsilon.current <- c(proposal.epsilon[accepted.moves],epsilon.current[non.accepted.moves])}
-
-output.thresh <- quantile(epsilon.current,1-discard.fraction)
-p.acc <- n.accepted/repeat.count/Nsim
-repeat.count <- max(1,as.integer(log(1-target.refreshment.rate)/log(1-p.acc)))
-save(theta,epsilon.current,log.theta.prior.density,mean.cov,file=paste("output/theta.test.",count,".dat",sep=""))
-count <- count + 1}
+  cat("SMC ABC Round ",count,", Threshold = ",output.thresh,", N[kernel] = ",repeat.count,"\n") ## watch the threshold convergence towards zero (though it'll probably stop well before then) ... for the discrepancy distance currently defined the output.thresh here can be taken as a mean fractional predictive error when divided by the size of the parameter space (i.e., frac.err = output.thresh/(9+nyears*6*2+nyears*4*2)) ... should be able to get frac.err < 0.1 at least in a few hours of runtime (e.g., leave it overnight) on a standard laptop
+  
+  resampled <- sample(which(epsilon.current < output.thresh),Nsim,replace=T)
+  theta <- theta[resampled,]
+  log.theta.prior.density <- log.prior.density(theta)
+  
+  mean.cov <- build.mean.cov.matrices(theta)
+  log.theta.proposal.density <- log.proposal.density(theta,mean.cov)
+  
+  n.accepted <- 0
+  
+  for (i in 1:repeat.count) {
+    
+    proposal.list <- simulate.from.proposal(Nsim,mean.cov)
+    log.proposal.density.new <- log.proposal.density(proposal.list,mean.cov)
+    log.proposal.prior.density <- log.prior.density(proposal.list)
+    proposal.epsilon <- compute.summary.stats(simulate.chlamydia(proposal.list))
+    
+    accepted.moves <- which(proposal.epsilon < output.thresh & log(runif(Nsim,0,1)) < log.proposal.prior.density - log.theta.prior.density + log.theta.proposal.density - log.proposal.density.new)
+    n.accepted <- n.accepted + length(accepted.moves)
+    non.accepted.moves <- which(!(1:Nsim %in% accepted.moves))
+    
+    theta <- rbind(proposal.list[accepted.moves,],theta[non.accepted.moves,])
+    log.theta.prior.density <- c(log.proposal.prior.density[accepted.moves],log.theta.prior.density[non.accepted.moves])
+    epsilon.current <- c(proposal.epsilon[accepted.moves],epsilon.current[non.accepted.moves])}
+  
+  output.thresh <- quantile(epsilon.current,1-discard.fraction)
+  p.acc <- n.accepted/repeat.count/Nsim
+  repeat.count <- max(1,as.integer(log(1-target.refreshment.rate)/log(1-p.acc)))
+  save(theta,epsilon.current,log.theta.prior.density,mean.cov,file=paste("output/theta.test.",count,".dat",sep=""))
+  count <- count + 1
+  
+}
 
