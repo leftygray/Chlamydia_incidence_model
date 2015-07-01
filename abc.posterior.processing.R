@@ -1,5 +1,6 @@
 ### R script to run the simulation algorithm a few more times to make posterior estimates of notification and test counts, incidence counts and fractions, positivity, & prevalence: we could save these during runtime of the original SMC-ABC algorithm (abc.run.abc.R) but that's a bit of a waste of time in my opinion
 
+# User specifications --------------------------------------------------------- 
 
 # User specified utput folder and file for processing
 outputData <- "2015-07-01 17-00-35"  # User specified date folder

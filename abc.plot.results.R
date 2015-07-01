@@ -2,7 +2,10 @@
 
 ### this script requires manual editing by someone who understands R in order to plot results beyond 2012 [ignoring our current extrapolation to 2013]
 
-### Initialize
+# User specifications --------------------------------------------------------- 
+
+# User specified output folder for processing
+outputData <- "2015-07-01 17-00-35"  # User specified date folder
 
 # Output folder - assuming correct working directory has been set
 outputFolder <- file.path(getwd(),"output","Figures")
@@ -14,19 +17,21 @@ plotpdf <- TRUE
 # Specify doing all plots 
 allPlots <- TRUE
 
+# Run main script -------------------------------------------------------------
+
 # Load universal functions
-source("load.library.R")
+source("code/load.library.R")
 
 if (allPlots) {
   ### Read in model fit
-  load("output/posterior.dat")
+  load(file.path("output",outputData,"posterior.dat"))
   
   ### Compute posterior weights
   is.weights <- dbeta(theta[,1],4000,420)/dbeta(theta[,1],207,22)*dbeta(theta[,5],1500,8)/dbeta(theta[,5],150,1)*dbeta(theta[,9],1050,10000)/dbeta(theta[,9],29,290)
   is.weights <- is.weights/sum(is.weights)
   
   ### Read in observational data
-  source("abc.read.in.data.R") # there will be 16 warnings here; these can be ignored ... they are due to the missing data in the NNDSS test counts
+  source("code/abc.read.in.data.R") # there will be 16 warnings here; these can be ignored ... they are due to the missing data in the NNDSS test counts
 
   
   ## Fig 2: Raw Data
@@ -534,7 +539,7 @@ if (allPlots) {
 }
 
 ## Fig 5: Time Independent Parameter Constraints
-source("abc.read.in.hyperparameters.R")
+source("code/abc.read.in.hyperparameters.R")
 
 setEPS()
 if (plotpdf) {
