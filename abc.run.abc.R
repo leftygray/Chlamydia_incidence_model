@@ -3,19 +3,19 @@
 ### For help: email: dr.ewan.cameron@gmail.com
 
 # Initilize
-setwd("C:/Users/Rgray/Documents/Research/!Evaluation_Modelling/evaluation_models/chlamydia_model/code")
-source("load.library.R")
+setwd("C:/Users/Rgray/Documents/Research/!Evaluation_Modelling/evaluation_models/chlamydia_model")
+source("code/load.library.R")
 
 ### load key modules
-source("abc.read.in.data.R") # this will generate a report of 16 "errors" which may be ignored (these errors are due to the missing data in the 2007-2008 test counts)
-source("abc.read.in.hyperparameters.R")
-source("abc.sample.from.prior.R")
-source("abc.prior.log.density.R")
-source("abc.simulate.chlamydia.R")
-source("abc.compute.summary.stats.R")
-source("abc.build.mean.cov.matrices.R")
-source("abc.sample.from.proposal.R")
-source("abc.proposal.log.density.R")
+source("code/abc.read.in.data.R") # this will generate a report of 16 "errors" which may be ignored (these errors are due to the missing data in the 2007-2008 test counts)
+source("code/abc.read.in.hyperparameters.R")
+source("code/abc.sample.from.prior.R")
+source("code/abc.prior.log.density.R")
+source("code/abc.simulate.chlamydia.R")
+source("code/abc.compute.summary.stats.R")
+source("code/abc.build.mean.cov.matrices.R")
+source("code/abc.sample.from.proposal.R")
+source("code/abc.proposal.log.density.R")
 
 ### Supposes existence of a subdirectory called 'output'
 

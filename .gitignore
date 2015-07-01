@@ -45,7 +45,8 @@ code/.Rhistory
 code/.RData
 code/._abc.plot.results.R
 code/._abc.positivity.surfaces
-code/data/._*.xlsx
-code/data/3101059.xlsx
+data/._*.xlsx
+data/Raw\ data/
+output/
 
 Sex Transm Infect-2015-Ali-sextrans-2014-051631.pdf
