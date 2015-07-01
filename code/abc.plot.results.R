@@ -6,6 +6,7 @@
 
 # Output folder - assuming correct working directory has been set
 outputFolder <- file.path(getwd(),"output","Figures")
+dir.create(outputFolder) # Create folder if it doesn't already exist
 
 # Specify type of image file for saved plots - pdf or eps
 plotpdf <- TRUE
