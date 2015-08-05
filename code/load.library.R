@@ -18,7 +18,7 @@ load.library <- function(package) {
   } else {
     
     print(paste("trying to install",package))
-    install.packages(package, character.only = TRUE)
+    install.packages(package)
     
     if(require(package, character.only = TRUE)) {
       print(paste(package, "installed and loaded"))
