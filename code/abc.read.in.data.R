@@ -104,7 +104,7 @@ tested.m <- matrix(as.numeric(t(as.matrix(tests.data[,2:5]))), nrow = 4)
 # tested.m <- tested.new.m
 # tested.f <- matrix(0,nrow=4,ncol=12)
 # for (i in 1:4) {for (j in 1:12) {tested.f[i,j] <- as.numeric(as.character(tests.data[j+3,i+19]))}}
-tested.f <- matrix(as.numeric(t(as.matrix(tests.data[,6:9]))), nrow = 4)
+tested.f <- matrix(as.numeric(t(as.matrix(tests.data[,7:10]))), nrow = 4)
 # tested.2013.f <- c(1498,88914,71104,52895)+c(2848,161437,139050,103231)+c(1784,58845,51939,38837)
 # tested.new.f <- matrix(nrow=4,ncol=13)
 # tested.new.f[,1:12] <- tested.f
