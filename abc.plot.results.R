@@ -5,7 +5,7 @@
 # User specifications --------------------------------------------------------- 
 
 # User specified output folder for processing
-outputData <- "2015-08-05 17-26-48"  # User specified date folder
+outputData <- "2017-08-03 18-10-04"  # User specified date folder
 
 # Output folder - assuming correct working directory has been set
 outputFolder <- file.path(getwd(),"output","Figures")
@@ -339,11 +339,20 @@ if (allPlots) {
   xy.high <- smooth.spline(seq(2001,(2001+nyears-1)),y.high)
   polygon(c(seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01),rev(seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))),c(predict(xy.low,seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))$y,rev(predict(xy.high,seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))$y)),dens=30,lwd=0.5,angle=-45,col="grey15",border="transparent",lty="12")
   
+  # Where prevalence data is used for validation - Original 2011 estimates
   prevalence.m.2011.given.had.sex <- c(4.7,6.6,3.7)*c(0.66,0.89,0.95)/100
   prevalence.f.2011.given.had.sex <- c(8.0,5.2,1.2)*c(0.56,0.90,0.97)/100
   prevalence.m.2011.given.had.sex.n <- c(298,527,432)
   prevalence.f.2011.given.had.sex.n <- c(742,1145,1140)
   
+  # Updated 2014-2015 estimates - prevalence and 95% CI for each age group 
+  # and gender. Provided by Jane Hocking. Age1 = 16-24, Age2 = 25-29.
+  prevalence.m.2014.age1 <- c(4.47, 3.19, 6.23)/100
+  prevalence.f.2014.age1 <- c(4.37, 3.51, 5.42)/100
+  prevalence.m.2014.age2 <- c(1.10, 0.40, 2.86)/100
+  prevalence.f.2014.age2 <- c(1.89, 1.22, 2.91)/100
+  
+  # Male prevalence 16-24
   p.obs <- (prevalence.m.2011.given.had.sex[1]*prevalence.m.2011.given.had.sex.n[1]+prevalence.m.2011.given.had.sex[2]*prevalence.m.2011.given.had.sex.n[2])/(prevalence.m.2011.given.had.sex.n[1]+prevalence.m.2011.given.had.sex.n[2])
   points(2011+0.12,p.obs,pch=15,cex=0.8)
   n <- (prevalence.m.2011.given.had.sex.n[1]+prevalence.m.2011.given.had.sex.n[2])
@@ -352,7 +361,13 @@ if (allPlots) {
   lines(c(2011,2011)+0.12,c(low,high),lwd=0.75)
   lines(c(2011+0.025,2011-0.025)+0.12,c(low,low),lwd=0.75)
   lines(c(2011+0.025,2011-0.025)+0.12,c(high,high),lwd=0.75)
+  # Add 2014-2015 data
+  points(2014.5+0.12,prevalence.m.2014.age1[1],pch=15,cex=0.8)
+  lines(c(2014.5,2014.5)+0.12,c(prevalence.m.2014.age1[2],prevalence.m.2014.age1[3]),lwd=0.75)
+  lines(c(2014.5+0.025,2014.5-0.025)+0.12,c(prevalence.m.2014.age1[2],prevalence.m.2014.age1[2]),lwd=0.75)
+  lines(c(2014.5+0.025,2014.5-0.025)+0.12,c(prevalence.m.2014.age1[3],prevalence.m.2014.age1[3]),lwd=0.75)
   
+  # Female prevalence 16-24
   p.obs <- (prevalence.f.2011.given.had.sex[1]*prevalence.f.2011.given.had.sex.n[1]+prevalence.f.2011.given.had.sex[2]*prevalence.f.2011.given.had.sex.n[2])/(prevalence.f.2011.given.had.sex.n[1]+prevalence.f.2011.given.had.sex.n[2])
   points(2011,p.obs,pch=19,cex=0.8)
   n <- (prevalence.f.2011.given.had.sex.n[1]+prevalence.f.2011.given.had.sex.n[2])
@@ -361,7 +376,13 @@ if (allPlots) {
   lines(c(2011,2011),c(low,high),lwd=0.75)
   lines(c(2011+0.025,2011-0.025),c(low,low),lwd=0.75)
   lines(c(2011+0.025,2011-0.025),c(high,high),lwd=0.75)
+  # Add 2014-2015 data
+  points(2014.5,prevalence.f.2014.age1[1],pch=19,cex=0.8)
+  lines(c(2014.5,2014.5),c(prevalence.f.2014.age1[2],prevalence.f.2014.age1[3]),lwd=0.75)
+  lines(c(2014.5+0.025,2014.5-0.025),c(prevalence.f.2014.age1[2],prevalence.f.2014.age1[2]),lwd=0.75)
+  lines(c(2014.5+0.025,2014.5-0.025),c(prevalence.f.2014.age1[3],prevalence.f.2014.age1[3]),lwd=0.75)
   
+  # Male prevalence 25-29
   p.obs <- prevalence.m.2011.given.had.sex[3]
   points(2011-0.12,p.obs,pch=22,cex=0.9)
   n <- prevalence.m.2011.given.had.sex.n[3]
@@ -370,7 +391,13 @@ if (allPlots) {
   lines(c(2011,2011)-0.12,c(low,high),lwd=0.75)
   lines(c(2011+0.025,2011-0.025)-0.12,c(low,low),lwd=0.75)
   lines(c(2011+0.025,2011-0.025)-0.12,c(high,high),lwd=0.75)
+  # Add 2014-2015 data
+  points(2014.5-0.12,prevalence.m.2014.age2[1],pch=22,cex=0.8)
+  lines(c(2014.5,2014.5)-0.12,c(prevalence.m.2014.age2[2],prevalence.m.2014.age2[3]),lwd=0.75)
+  lines(c(2014.5+0.025,2014.5-0.025)-0.12,c(prevalence.m.2014.age2[2],prevalence.m.2014.age2[2]),lwd=0.75)
+  lines(c(2014.5+0.025,2014.5-0.025)-0.12,c(prevalence.m.2014.age2[3],prevalence.m.2014.age2[3]),lwd=0.75)
   
+  # Female prevalence 25-29
   p.obs <- prevalence.f.2011.given.had.sex[3]
   points(2011,p.obs,pch=21,cex=0.9)
   n <- prevalence.f.2011.given.had.sex.n[3]
@@ -379,23 +406,30 @@ if (allPlots) {
   lines(c(2011,2011),c(low,high),lwd=0.75)
   lines(c(2011+0.025,2011-0.025),c(low,low),lwd=0.75)
   lines(c(2011+0.025,2011-0.025),c(high,high),lwd=0.75)
+  # Add 2014-2015 data
+  points(2014.5,prevalence.f.2014.age2[1],pch=21,cex=0.8)
+  lines(c(2014.5,2014.5),c(prevalence.f.2014.age2[2],prevalence.f.2014.age2[3]),lwd=0.75)
+  lines(c(2014.5+0.025,2014.5-0.025),c(prevalence.f.2014.age2[2],prevalence.f.2014.age2[2]),lwd=0.75)
+  lines(c(2014.5+0.025,2014.5-0.025),c(prevalence.f.2014.age2[3],prevalence.f.2014.age2[3]),lwd=0.75)
   
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,(2001+nyears-1)),tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,(2001+nyears-1)),labels=c("","","","","","",""),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
+  xticks <- seq(2001,(2001+nyears-1),by=2)
+  finalYear <- (2001+nyears-1)
+  axis(1,at=xticks,tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
+  axis(1,at=xticks,labels=rep("",length(xticks)),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Prevalence (%)",side=2,line=2.5,cex=0.9)
   axis(2,las=2,at=seq(0,0.075,by=0.0125),labels=c("     0","1.25","  2.5","3.75","     5","6.25","  7.5"),tck=-0.0075,hadj=0.55,cex.axis=1,lwd.ticks=0.5)
-  axis(2,las=2,at=seq(0,0.075,by=0.0125),labels=c("  ","  ","  ","   ","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
+  axis
   axis(4,las=2,at=seq(0,0.075,by=0.0125),labels=c("  ","  ","  ","   ","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Year",side=1,line=1.65,cex=0.9)
   
   ypos <-  0.011
-  text(2013.75,ypos,expression(plain("F 25\uad")*plain("29")),cex=0.8)
+  text(finalYear+0.75,ypos,expression(plain("F 25\uad")*plain("29")),cex=0.8)
   ypos <- 0.025
-  text(2013.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
+  text(finalYear+0.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
   ypos <- 0.037
-  text(2013.75,ypos,expression(plain("M 25\uad")*plain("29")),cex=0.8)
+  text(finalYear+0.75,ypos,expression(plain("M 25\uad")*plain("29")),cex=0.8)
   ypos <- 0.056
-  text(2013.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
+  text(finalYear+0.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
   
   legend("topleft","95% CIs",bty='n',cex=1)
   
@@ -410,6 +444,47 @@ if (allPlots) {
   dev.off()
   
   ## Fig 4[a]: Incidence numbers by sex & age-group: 15-24 & 25+
+  
+  # Create data frame for incidence results
+  incidenceDF <- data.frame(year = numeric(nyears), 
+                            male15_29_low = numeric(nyears),
+                            male15_29_high = numeric(nyears),
+                            female15_29_low = numeric(nyears),
+                            female15_29_high = numeric(nyears))
+  
+  # Sort out incidence
+  f.low <- f.high <- numeric(nyears)
+  m.low <- m.high <- numeric(nyears)
+  
+  f.matrix <- mock.inc.f[,,4] 
+  m.matrix <- mock.inc.m[,,4]
+  
+  for (jj in 1:nyears) {
+    # Females
+    olistf <- sort.list(f.matrix[,jj])
+    f.low[jj] <- f.matrix[olistf[which.min(abs(cumsum(is.weights[olistf])-(1-0.95)/2))],jj]
+    f.high[jj] <- f.matrix[olistf[which.min(abs(cumsum(is.weights[olistf])-(1-(1-0.95)/2)))],jj]
+    
+    # Males
+    olistm <- sort.list(m.matrix[,jj])
+    m.low[jj] <- m.matrix[olistm[which.min(abs(cumsum(is.weights[olistm])-(1-0.95)/2))],jj]
+    m.high[jj] <- m.matrix[olistm[which.min(abs(cumsum(is.weights[olistm])-(1-(1-0.95)/2)))],jj]
+  
+  }
+
+  # Store results in data frame and save
+  incidenceDF$year <- 2001:(2001+nyears-1)
+  incidenceDF$male15_29_low <- m.low
+  incidenceDF$male15_29_high <- m.high
+  incidenceDF$female15_29_low <- f.low
+  incidenceDF$female15_29_high <- f.high
+  
+  # Write to file
+  write.csv(incidenceDF, file=file.path(outputFolder, 
+            paste("Chlamydia_Incidence-", toString(2001+nyears-1), ".csv", sep = "")), 
+            row.names = FALSE)
+
+  # Create plot
   setEPS()
   if (plotpdf) {
     pdf(file.path(outputFolder,"fig4.pdf"),width=12,height=3.267*2)
@@ -420,12 +495,12 @@ if (allPlots) {
   layout((c(1,2)))
   par(mai=c(0.45,0.90,0.10,0.10),cex=0.7)
   
-  maxy <- 3
+  maxy <- 1.5
   
   plot(-100,-100,xlim=c(2001,(2001+nyears-1)+1),ylim=c(0,maxy*10^5),xlab="",ylab="",xaxt='n',yaxt='n')
   
   y.low <- y.high <- numeric(nyears)
-  y.matrix <- mock.inc.f[,,1]
+  y.matrix <- mock.inc.f[,,1] 
   for (j in 1:nyears) {
     olist <- sort.list(y.matrix[,j])
     y.low[j] <- y.matrix[olist[which.min(abs(cumsum(is.weights[olist])-(1-0.95)/2))],j]
@@ -1741,8 +1816,6 @@ legend("bottomleft",expression(plain("[2001\uad")*plain("2013: model\uad")*plain
 legend("top",expression(plain("Alternative priors for ")*p[plain("rep.")]),bty='n',cex=1.5)
 
 dev.off()
-
-
 
 y.med <- numeric(nyears)
 y.matrix <- (mock.inc.m[,,1]+mock.inc.m[,,2]+mock.inc.f[,,1]+mock.inc.f[,,2])
