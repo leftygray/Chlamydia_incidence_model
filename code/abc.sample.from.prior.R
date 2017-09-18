@@ -34,8 +34,10 @@ simulate.from.prior <- function(Nsim) {
     z[((i-1)*nyears+1):(i*nyears),1] <- x
   }
   
-  # apply the Matern correlation function to transform the distance matrix to a covariance matrix
-  p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.inf[2],range=prior.mvn.inf[3],smoothness=prior.mvn.inf[4])
+  # apply the Matern correlation function to transform the distance matrix to a covariance matrix. Note had to change how the Matern function works because of an update to 
+  # the fields package
+# p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.inf[2],range=prior.mvn.inf[3],smoothness=prior.mvn.inf[4])
+  p <- prior.mvn.inf[2] * Matern(as.matrix(dist(z,diag=T,upper=T)), range=prior.mvn.inf[3],smoothness=prior.mvn.inf[4])
   sgp <- rmvnorm(Nsim,mean=rep(prior.mvn.inf[1],nyears*6),sigma=p)
   tsgp <- exp(sgp)/(1+exp(sgp)) # logistic transformation to a probability between 0 and 1
   theta[,(9+1):(9+nyears*6)] <- tsgp # infection matrix for males
@@ -52,8 +54,10 @@ simulate.from.prior <- function(Nsim) {
     z[((i-1)*nyears+1):(i*nyears),1] <- x
   }
   
-  # apply the Matern correlation function to transform the distance matrix to a covariance matrix
-  p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.screening[2],range=prior.mvn.screening[3],smoothness=prior.mvn.screening[4])
+  # apply the Matern correlation function to transform the distance matrix to a covariance matrix. Note had to change how the Matern function works because of an update to 
+  # the fields package
+  # p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.screening[2],range=prior.mvn.screening[3],smoothness=prior.mvn.screening[4])
+  p <- prior.mvn.screening[2] * Matern(as.matrix(dist(z,diag=T,upper=T)),range=prior.mvn.screening[3],smoothness=prior.mvn.screening[4])
   sgp <- rmvnorm(Nsim,mean=rep(prior.mvn.screening[1],nyears*6),sigma=p)
   tsgp <- exp(sgp)/(1+exp(sgp)) # logistic transformation to a probability between 0 and 1
   theta[,(9+nyears*6*2+1):(9+nyears*6*3)] <- tsgp # screening matrix for males

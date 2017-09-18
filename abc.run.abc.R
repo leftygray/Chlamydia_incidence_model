@@ -2,6 +2,9 @@
 
 ### For help: email: dr.ewan.cameron@gmail.com
 
+# Clear workspace
+# rm(list=ls()) 
+
 # Initilize
 setwd("C:/Users/Rgray/Documents/Research/!Evaluation_Modelling/evaluation_models/chlamydia_model")
 source("code/load.library.R")

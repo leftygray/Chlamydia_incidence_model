@@ -28,7 +28,8 @@ log.prior.density <- function(theta) {
   for (i in 1:6) {z[((i-1)*nyears+1):(i*nyears),2] <- y[i]
                   z[((i-1)*nyears+1):(i*nyears),1] <- x}
   # apply the Matern correlation function to transform the distance matrix to a covariance matrix
-  p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.inf[2],range=prior.mvn.inf[3],smoothness=prior.mvn.inf[4])
+  # p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.inf[2],range=prior.mvn.inf[3],smoothness=prior.mvn.inf[4])
+  p <- prior.mvn.inf[2] * Matern(as.matrix(dist(z,diag=T,upper=T)),range=prior.mvn.inf[3],smoothness=prior.mvn.inf[4])
   theta.m.inf <- log(theta[,(9+1):(9+nyears*6)]/(1-theta[,(9+1):(9+nyears*6)]))
   log.prior.density <- log.prior.density + dmvnorm(theta.m.inf,mean=rep(prior.mvn.inf[1],nyears*6),sigma=p,log=T)
   theta.f.inf <- log(theta[,((9+nyears*6)+1):(9+nyears*6*2)]/(1-theta[,((9+nyears*6)+1):(9+nyears*6*2)]))
@@ -41,7 +42,8 @@ log.prior.density <- function(theta) {
   for (i in 1:6) {z[((i-1)*nyears+1):(i*nyears),2] <- y[i]
                   z[((i-1)*nyears+1):(i*nyears),1] <- x}
   # apply the Matern correlation function to transform the distance matrix to a covariance matrix
-  p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.screening[2],range=prior.mvn.screening[3],smoothness=prior.mvn.screening[4])
+  # p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.screening[2],range=prior.mvn.screening[3],smoothness=prior.mvn.screening[4])
+  p <- prior.mvn.screening[2] * Matern(as.matrix(dist(z,diag=T,upper=T)),range=prior.mvn.screening[3],smoothness=prior.mvn.screening[4])
   theta.m.screening <- log(theta[,(9+nyears*6*2+1):(9+nyears*6*3)]/(1-theta[,(9+nyears*6*2+1):(9+nyears*6*3)]))
   log.prior.density <- log.prior.density + dmvnorm(theta.m.screening,mean=rep(prior.mvn.screening[1],nyears*6),sigma=p,log=T)
   theta.f.screening <- log(theta[,(9+nyears*6*3+1):(9+nyears*6*4)]/(1-theta[,(9+nyears*6*3+1):(9+nyears*6*4)]))

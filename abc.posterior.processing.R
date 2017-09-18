@@ -3,8 +3,8 @@
 # User specifications --------------------------------------------------------- 
 
 # User specified utput folder and file for processing
-outputData <- "2015-08-05 17-26-48"  # User specified date folder
-fileNumber <- 73                     # User specifiied file number
+outputData <- "2017-08-03 18-10-04"  # User specified date folder
+fileNumber <- 65                     # User specified file number
 
 # Run main script ---------------------------------------------------------------
 
@@ -46,15 +46,23 @@ mock.test.f <- array(0,c(Nsim,nyears,2))
 mock.test.f[,,1] <- simulated.population[[8]]$output[,36,8:(nyears+7)]+simulated.population[[9]]$output[,36,8:(nyears+7)]
 mock.test.f[,,2] <- simulated.population[[10]]$output[,36,8:(nyears+7)]+simulated.population[[11]]$output[,36,8:(nyears+7)]+simulated.population[[12]]$output[,36,8:(nyears+7)]
 
-mock.inc.m <- array(0,c(Nsim,nyears,3))
+mock.inc.m <- array(0,c(Nsim,nyears,4))
 mock.inc.m[,,1] <- simulated.population[[2]]$output[,2,8:(nyears+7)]+simulated.population[[3]]$output[,2,8:(nyears+7)]
 mock.inc.m[,,2] <- simulated.population[[4]]$output[,2,8:(nyears+7)]+simulated.population[[5]]$output[,2,8:(nyears+7)]+simulated.population[[6]]$output[,2,8:(nyears+7)]
 mock.inc.m[,,3] <- simulated.population[[1]]$output[,2,8:(nyears+7)]+simulated.population[[2]]$output[,2,8:(nyears+7)]+simulated.population[[3]]$output[,2,8:(nyears+7)]+simulated.population[[4]]$output[,2,8:(nyears+7)]+simulated.population[[5]]$output[,2,8:(nyears+7)]+simulated.population[[6]]$output[,2,8:(nyears+7)]
+# Incidence in Males aged 15-29
+mock.inc.m[,,4] <- simulated.population[[2]]$output[,2,8:(nyears+7)] + 
+  simulated.population[[3]]$output[,2,8:(nyears+7)] +
+  simulated.population[[4]]$output[,2,8:(nyears+7)]
 
-mock.inc.f <- array(0,c(Nsim,nyears,3))
+mock.inc.f <- array(0,c(Nsim,nyears,4))
 mock.inc.f[,,1] <- simulated.population[[8]]$output[,2,8:(nyears+7)]+simulated.population[[9]]$output[,2,8:(nyears+7)]
 mock.inc.f[,,2] <- simulated.population[[10]]$output[,2,8:(nyears+7)]+simulated.population[[11]]$output[,2,8:(nyears+7)]+simulated.population[[12]]$output[,2,8:(nyears+7)]
 mock.inc.f[,,3] <- simulated.population[[7]]$output[,2,8:(nyears+7)]+simulated.population[[8]]$output[,2,8:(nyears+7)]+simulated.population[[9]]$output[,2,8:(nyears+7)]+simulated.population[[10]]$output[,2,8:(nyears+7)]+simulated.population[[11]]$output[,2,8:(nyears+7)]+simulated.population[[12]]$output[,2,8:(nyears+7)]
+# Incidence in Females aged 15-29
+mock.inc.f[,,4] <- simulated.population[[8]]$output[,2,8:(nyears+7)] +
+  simulated.population[[9]]$output[,2,8:(nyears+7)] +
+  simulated.population[[10]]$output[,2,8:(nyears+7)]
 
 mock.incper.m <- array(0,c(Nsim,nyears,4))
 mock.incper.m[,,1] <- (simulated.population[[2]]$output[,2,8:(nyears+7)]+simulated.population[[3]]$output[,2,8:(nyears+7)])/(m.15.19+m.20.24)
@@ -148,7 +156,7 @@ while (sum(required) > 6) { ### this loop may take a while ... it'll do the easy
 # save the simplified output in a file called 'posterior.dat'
 save(mock.not.m,mock.not.f,mock.test.m,mock.test.f,mock.inc.m,mock.inc.f,
      mock.incper.m,mock.incper.f,mock.prev.m,mock.prev.f,mock.pos.m,mock.pos.f,
-     theta, file=file.path(outputFolder, "posterior.dat")) 
+     theta, file=file.path(outputFolder, "posterior.dat")) # "incidence.csv"
 
 
 is.weights <- dbeta(theta[,1],4000,420)/dbeta(theta[,1],207,22)*dbeta(theta[,5],1500,8)/dbeta(theta[,5],150,1)*dbeta(theta[,9],1050,10000)/dbeta(theta[,9],29,290)
