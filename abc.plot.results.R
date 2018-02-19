@@ -8,7 +8,7 @@
 outputData <- "2017-08-03 18-10-04"  # User specified date folder
 
 # Output folder - assuming correct working directory has been set
-outputFolder <- file.path(getwd(),"output","Figures")
+outputFolder <- file.path(getwd(),"output","figures")
 dir.create(outputFolder) # Create folder if it doesn't already exist
 
 # Specify type of image file for saved plots - pdf or eps
@@ -480,10 +480,13 @@ if (allPlots) {
   incidenceDF$female15_29_high <- f.high
   
   # Write to file
-  write.csv(incidenceDF, file=file.path(outputFolder, 
-            paste("Chlamydia_Incidence-", toString(2001+nyears-1), ".csv", sep = "")), 
-            row.names = FALSE)
+  # write.csv(incidenceDF, file=file.path(outputFolder, 
+  #           paste("Chlamydia_Incidence-", toString(2001+nyears-1), ".csv", sep = "")), 
+  #           row.names = FALSE)
 
+  write.csv(incidenceDF, file = file.path(outputFolder, "Chlamydia_Incidence.csv"), 
+            row.names = FALSE)
+  
   # Create plot
   setEPS()
   if (plotpdf) {

@@ -55,6 +55,9 @@ data/Original_2012_data/
 data/Original_2013_data/
 data/2014_inputs/
 data/2015_inputs/
+data/2016_inputs/
+data/!Raw_data/
 .Rhistory
 .RData
 
+.Rproj.user

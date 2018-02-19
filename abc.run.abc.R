@@ -1,13 +1,8 @@
 ### R script to run the SMC-ABC algorithm for constraint of our model parameters
 
-### For help: email: dr.ewan.cameron@gmail.com
-
-# Clear workspace
-# rm(list=ls()) 
-
 # Initilize
-setwd("C:/Users/Rgray/Documents/Research/!Evaluation_Modelling/evaluation_models/chlamydia_model")
-source("code/load.library.R")
+
+# First set working directory to source file location.
 
 ### load key modules
 source("code/abc.read.in.data.R") # this will generate a report of 16 "errors" which may be ignored (these errors are due to the missing data in the 2007-2008 test counts)
@@ -19,6 +14,9 @@ source("code/abc.compute.summary.stats.R")
 source("code/abc.build.mean.cov.matrices.R")
 source("code/abc.sample.from.proposal.R")
 source("code/abc.proposal.log.density.R")
+
+# Useful functions
+source("code/load.library.R")
 
 ### Create 'output' folder and a subfolder of date and time to store each set of runs
 dir.create(file.path(getwd(),"output"))

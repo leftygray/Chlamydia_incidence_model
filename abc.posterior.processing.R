@@ -22,7 +22,7 @@ outputFolder <-file.path(getwd(),"output",outputData)
 load(file.path(outputFolder, paste("theta.test.",toString(fileNumber),".dat",sep = "")))
 
 # Script parameters     
-epsilon.thresh <- median(epsilon.current)
+epsilon.thresh <- median(epsilon.current) 
 Nsim <- length(epsilon.current)
 
 simulated.population <- simulate.chlamydia(theta)
