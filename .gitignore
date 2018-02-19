@@ -47,7 +47,10 @@ code/._abc.plot.results.R
 code/._abc.positivity.surfaces
 data/._*.xlsx
 data/Raw\ data/
-output/
+output/*
+!output/figures/
+output/figures/*
+!output/figures/Chlamydia_Incidence.csv
 
 Sex Transm Infect-2015-Ali-sextrans-2014-051631.pdf
 data/temp/
