@@ -10,7 +10,7 @@ For the paper, estimates were generated for the 2001-2013 period. The original c
 **Email:** dr.ewan.cameron@gmail.com  
 **Affiliations:** School of Mathematical Sciences, Queensland University of Technology, Brisbane, Australia; Spatial Ecology & Epidemiology Group, University of Oxford, Oxford, United Kingdom
 
-**Repository owner:** Richard T. Gray  
+**Repository Maintainer:** Richard T. Gray  
 **ORCID ID:** orcid.org/0000-0002-2885-0483    
 **Affiliation:** [_The Kirby Institute_](https://kirby.unsw.edu.au/), UNSW Sydney, Sydney NSW 2052, Australia
 
@@ -38,7 +38,7 @@ Contains all the specific R functions used in the analysis and by the main direc
 
 #### data ####
 
-Contains all the input data files used by the `abc.run.abc.R` script. These files are stored as `.csv` files containing data since 2001 to the year of analysis (currently 2016). Four input files are required for the model to run:
+Contains all the input data files (collated from publicly available data) used by the `abc.run.abc.R` script. These files are stored as `.csv` files containing data since 2001 to the year of analysis (currently 2016). Four input files are required for the model to run:
 
 - `priors.csv`:  Specifications for prior distributions describing constant parameters for all sub-populations.
 - `population.csv`: Estimated population size for males, females and overall for each age from 0 to 100 years for each year since 2001.  
