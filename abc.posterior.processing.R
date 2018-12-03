@@ -3,8 +3,8 @@
 # User specifications --------------------------------------------------------- 
 
 # User specified utput folder and file for processing
-outputData <- "2017-08-03 18-10-04"  # User specified date folder
-fileNumber <- 65                     # User specified file number
+outputData <- "2018-12-03 09-52-47"  # User specified date folder
+fileNumber <- 61                    # User specified file number
 
 # Run main script ---------------------------------------------------------------
 

@@ -4,6 +4,9 @@
 
 # First set working directory to source file location.
 
+### Load library loading fucntion
+source("code/load.library.R")
+
 ### load key modules
 source("code/abc.read.in.data.R") # this will generate a report of 16 "errors" which may be ignored (these errors are due to the missing data in the 2007-2008 test counts)
 source("code/abc.read.in.hyperparameters.R")
@@ -14,9 +17,6 @@ source("code/abc.compute.summary.stats.R")
 source("code/abc.build.mean.cov.matrices.R")
 source("code/abc.sample.from.proposal.R")
 source("code/abc.proposal.log.density.R")
-
-# Useful functions
-source("code/load.library.R")
 
 ### Create 'output' folder and a subfolder of date and time to store each set of runs
 dir.create(file.path(getwd(),"output"))
