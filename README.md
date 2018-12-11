@@ -1,10 +1,14 @@
 ## Australian Chlamydia Incidence Model
 
-This project contains the code for a model to estimate trends in chlamydia incidence in Australia. The code implements a Bayesian statistical method based on a decision-pathway model producing estimates for chlamydia incidence in Australia since 2001 for male and female 16–29-year-olds. The original code was developed for the paper: 
+This project contains the code for a model to estimate trends in chlamydia incidence in Australia. The code implements a Bayesian statistical method based on a decision-pathway model producing estimates for chlamydia incidence in Australia since 2001 for male and female 16–29-year-olds. 
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2187723.svg)](https://doi.org/10.5281/zenodo.2187723)
+
+The original code was developed for the paper: 
 
 * Hammad Ali, Ewan Cameron, Christopher C Drovandi, James M McCaw, Rebecca J Guy, Melanie Middleton, Carol El-Hayek, et al. “A New Approach to Estimating Trends in Chlamydia Incidence.” Sexually Transmitted Infections, 2015;91:513–519. doi:10.1136/sextrans-2014-051631
 
-For the paper, estimates were generated for the 2001-2013 period. The original code has been modified slightly to produce annual estimates since 2013 for the HIV, viral hepatitis and sexually transmissible infections in [Australia Annual Surveillance Report](https://kirby.unsw.edu.au/report-type/annual-surveillance-reports) produced annually by the [_The Kirby Institute_](https://kirby.unsw.edu.au/). The model is written in the R language (currently version 3.3.2) with the input files to produce estimates for the 2001-2016 period.
+For the paper, estimates were generated for the 2001-2013 period. The original code has been modified slightly to produce annual estimates since 2013 for the HIV, viral hepatitis and sexually transmissible infections in [Australia Annual Surveillance Report](https://kirby.unsw.edu.au/report-type/annual-surveillance-reports) produced annually by the [_The Kirby Institute_](https://kirby.unsw.edu.au/). The model is written in the R language (currently version 3.3.2) with the input files to produce estimates for the 2001-2017 period.
 
 **Original Model Developer:** Ewan Cameron     
 **Email:** dr.ewan.cameron@gmail.com  
@@ -38,7 +42,7 @@ Contains all the specific R functions used in the analysis and by the main direc
 
 #### data ####
 
-Contains all the input data files (collated from publicly available data) used by the `abc.run.abc.R` script. These files are stored as `.csv` files containing data since 2001 to the year of analysis (currently 2016). Four input files are required for the model to run:
+Contains all the input data files (collated from publicly available data) used by the `abc.run.abc.R` script. These files are stored as `.csv` files containing data since 2001 to the year of analysis (currently 2017). Four input files are required for the model to run:
 
 - `priors.csv`:  Specifications for prior distributions describing constant parameters for all sub-populations.
 - `population.csv`: Estimated population size for males, females and overall for each age from 0 to 100 years for each year since 2001.  
