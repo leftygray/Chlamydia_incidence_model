@@ -33,6 +33,8 @@ if (allPlots) {
   ### Read in observational data
   source("code/abc.read.in.data.R") # there will be 16 warnings here; these can be ignored ... they are due to the missing data in the NNDSS test counts
 
+   # Plot specifications
+   xaxis <- seq(2001, (2001+nyears-1) + 1, by = 2)
   
   ## Fig 2: Raw Data
   setEPS()
@@ -46,7 +48,7 @@ if (allPlots) {
   #
   par(mai=c(0.45,0.7,0.1,0.77),cex=0.7)
   
-  plot(-100,-100,xlim=c(2001,(2001+nyears-1)),ylim=c(0,8.1*10^4),xlab="",ylab="",xaxt='n',yaxt='n')
+  plot(-100,-100,xlim=c(2001,(2001+nyears-1)+1),ylim=c(0,10*10^4),xlab="",ylab="",xaxt='n',yaxt='n')
   
   points(2001:(2001+nyears-1),notifications.m[2,]+notifications.m[3,]+notifications.m[4,]+notifications.m[5,]+notifications.m[6,],pch=24,cex=0.95,col="grey15",bg="grey15")
   lines(2001:(2001+nyears-1),notifications.m[2,]+notifications.m[3,]+notifications.m[4,]+notifications.m[5,]+notifications.m[6,],lwd=0.75,col="grey15")
@@ -61,18 +63,20 @@ if (allPlots) {
   legend("topleft",c("Notifications","","","Tests","",""),pch=c(19,24,23,19,24,23),ncol=2,bty='n',cex=1,pt.cex=c(1,0.95,1.2,1,0.95,1.2),col="white",pt.bg="white")
   legend("topleft",c("","Males","Females      ","","Males","Females"),pch=c(19,24,23,19,24,23),ncol=2,bty='n',cex=1,pt.cex=c(1,0.95,1.2,1,0.95,1.2),col=c("transparent","grey15","grey89","transparent","grey45","grey79"),pt.bg=c("transparent","grey15","grey89","transparent","white","white"),adj=c(0,0.45))
   
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),labels=c("","","","","","",""),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
+  axis(1,at=xaxis,tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
+  axis(1,at=xaxis,labels=rep("",length(xaxis)),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Number of chlamydia notifications",side=2,line=3.4,cex=0.9)
-  axis(2,las=2,at=c(0,1,2,3,4,5,6,7,8,9)*10^4,labels=c("           0"," "," 20,000"," "," 40,000"," ","60,000","","80,000",""),tck=-0.0075,hadj=0.77,cex.axis=1,lwd.ticks=0.5)
-  axis(2,las=2,at=c(0,1,2,3,4,5,6,7,8,9)*10^4,labels=c("            ","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
-  axis(4,las=2,at=c(0,1,2,3,4,5,6,7,8,9)*10^4,labels=c("            ","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
+  axis(2,las=2,at=c(0,1,2,3,4,5,6,7,8,9,10)*10^4,labels=c("           0"," "," 20,000"," "," 40,000"," ","60,000","","80,000","", "100,000"),tck=-0.0075,hadj=0.77,cex.axis=1,lwd.ticks=0.5)
+  axis(2,las=2,at=c(0,1,2,3,4,5,6,7,8,9,10)*10^4,labels=c("            ","","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
+  axis(4,las=2,at=c(0,1,2,3,4,5,6,7,8,9,10)*10^4,labels=c("            ","","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Year",side=1,line=1.65,cex=0.9)
   
   mtext("Number of chlamydia tests",side=4,line=3.9,cex=0.9)
-  axis(4,las=2,at=c(0,1,2,3,4,5,6,7,8,9)*10^4,labels=c("0          "," "," 200,000"," "," 400,000"," ","600,000","","800,000",""),tck=-0.0075,hadj=0.25,cex.axis=1,lwd.ticks=0.5)
+  axis(4,las=2,at=c(0,1,2,3,4,5,6,7,8,9,10)*10^4,labels=c("0          "," "," 200,000"," "," 400,000"," ","600,000","","800,000","","1,000,000"),tck=-0.0075,hadj=0.25,cex.axis=1,lwd.ticks=0.5)
   
   dev.off()
+  
+  ## Fig 3[a]: Notifications by sex & age-group: 15-24 & 25+
   
   setEPS()
   if (plotpdf) {
@@ -83,7 +87,7 @@ if (allPlots) {
   
   layout(cbind(c(1,2,3)))
   
-  ## Fig 3[a]: Notifications by sex & age-group: 15-24 & 25+
+
   par(mai=c(0.45,0.7,0.10,0.15),cex=0.7)
   
   plot(-100,-100,xlim=c(2001,(2001+nyears-1)+1),ylim=c(0,4.4*10^4),xlab="",ylab="",xaxt='n',yaxt='n')
@@ -154,8 +158,8 @@ if (allPlots) {
             rev(predict(xy.high,seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))$y)),
           dens=30,lwd=0.5,angle=-45,col="grey15",border="transparent",lty="12")
   
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),labels=c("","","","","","",""),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
+  axis(1,at=xaxis,tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
+  axis(1,at=xaxis,labels=rep("",length(xaxis)),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Number of notifications",side=2,line=3.4,cex=0.9)
   axis(2,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5)*10^4,labels=c("           0",""," 10,000",""," 20,000",""," 30,000",""," 40,000",""," 50,000"),tck=-0.0075,hadj=0.77,cex.axis=1,lwd.ticks=0.5)
   axis(2,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5)*10^4,labels=c("            ","","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
@@ -167,19 +171,19 @@ if (allPlots) {
   points(2001:(2001+nyears-1),notifications.m[2,]+notifications.m[3,],pch=15,cex=0.8)
   points(2001:(2001+nyears-1),notifications.m[4,]+notifications.m[5,]+notifications.m[6,],pch=22,cex=0.9)
   
-  ypos <- 1.29*10^4
-  text(2013.75,ypos,"F 25+",cex=0.8)
-  ypos <- 2.9*10^4
-  text(2013.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
-  ypos <- 2.13*10^4
-  text(2013.75,ypos,"M 25+",cex=0.8)
-  ypos <- 1.63*10^4
-  text(2013.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
+  ypos <- 1.5*10^4
+  text(2016.75,ypos,"F 25+",cex=0.8)
+  ypos <- 3.4*10^4
+  text(2016.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
+  ypos <- 2.4*10^4
+  text(2016.75,ypos,"M 25+",cex=0.8)
+  ypos <- 2.1*10^4
+  text(2016.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
   
   legend("topleft","95% CIs",bty='n',cex=1)
   
   legend("topright",c(expression(plain("M 15\uad")*plain("24")),expression(plain("F 15\uad")*plain("24")),"M 25+","F 25+"),pch=c(15,19,22,21),ncol=2,bty='n',cex=1,pt.cex=c(0.8,0.8,0.9,0.9))
-  legend("bottomleft",expression(plain("[2001\uad")*plain("2013: model\uad")*plain("based, ")*plain("(2001+nyears-1)+1: extrapolated]")),bty='n',cex=0.8)
+  legend("bottomleft",expression(paste(plain("[2001\uad")*plain("2016: model\uad")*plain("based, 2017: extrapolated]"))),bty='n',cex=0.8)
   
   mtext(expression(plain("Annual Notification Count from NNDSS Chlamydia Testing Australia\uad")*plain("Wide [Fitted]   ")),side=3,line=0.5,cex=0.9)
   box()
@@ -187,7 +191,7 @@ if (allPlots) {
   ## Fig 3[b]: Test count by sex & age-group: 15-24 & 25+
   par(mai=c(0.45,0.7,0.10,0.15),cex=0.7)
   
-  plot(-100,-100,xlim=c(2001,(2001+nyears-1)+1),ylim=c(0,6*10^5),xlab="",ylab="",xaxt='n',yaxt='n')
+  plot(-100,-100,xlim=c(2001,(2001+nyears-1)+1),ylim=c(0,8*10^5),xlab="",ylab="",xaxt='n',yaxt='n')
   
   y.low <- y.high <- numeric(nyears)
   y.matrix <- mock.test.f[,,1]
@@ -252,12 +256,12 @@ if (allPlots) {
           dens=30,lwd=0.5,angle=-45,col="grey15",border="transparent",lty="12")
   
   
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),labels=c("","","","","","",""),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
+  axis(1,at=xaxis,tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
+  axis(1,at=xaxis,labels=rep("",length(xaxis)),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Number of tests",side=2,line=3.7,cex=0.9)
-  axis(2,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6)*10^5,labels=c("             0",""," 100,000",""," 200,000",""," 300,000",""," 400,000","","500,000","","600,000"),tck=-0.0075,hadj=0.8,cex.axis=1,lwd.ticks=0.5)
-  axis(2,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6)*10^5,labels=c("            ","","","","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
-  axis(4,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6)*10^5,labels=c("            ","","","","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
+  axis(2,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8)*10^5,labels=c("             0",""," 100,000",""," 200,000",""," 300,000",""," 400,000","","500,000","","600,000","", "700,000", "", "800,000"),tck=-0.0075,hadj=0.8,cex.axis=1,lwd.ticks=0.5)
+  axis(2,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8)*10^5,labels=c("            ","","","","","","","","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
+  axis(4,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8)*10^5,labels=c("            ","","","","","","","","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Year",side=1,line=1.65,cex=0.9)
   
   points(2001:(2001+nyears-1),tested.f[2,],pch=19,cex=0.8)
@@ -265,19 +269,19 @@ if (allPlots) {
   points(2001:(2001+nyears-1),tested.m[2,],pch=15,cex=0.8)
   points(2001:(2001+nyears-1),tested.m[3,]+tested.m[4,],pch=22,cex=0.9)
   
-  ypos <-  3.58*10^5
-  text(2013.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
-  ypos <- 4.28*10^5
-  text(2013.75,ypos,"F 25+",cex=0.8)
-  ypos <- 1.94*10^5
-  text(2013.75,ypos,"M 25+",cex=0.8)
+  ypos <-  3.9*10^5
+  text(2016.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
+  ypos <- 5.5*10^5
+  text(2016.75,ypos,"F 25+",cex=0.8)
+  ypos <- 2.9*10^5
+  text(2016.75,ypos,"M 25+",cex=0.8)
   ypos <- 0.69*10^5
-  text(2013.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
+  text(2016.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
   
   legend("topleft","95% CIs",bty='n',cex=1)
   
   legend("topright",c(expression(plain("M 15\uad")*plain("24")),expression(plain("F 15\uad")*plain("24")),"M 25+","F 25+"),pch=c(15,19,22,21),ncol=2,bty='n',cex=1,pt.cex=c(0.8,0.8,0.9,0.9))
-  legend("bottomright",expression(plain("[2001\uad")*plain("2013: model\uad")*plain("based, ")*plain("(2001+nyears-1)+1: extrapolated]")),bty='n',cex=0.8)
+  legend("bottomright",expression(plain("[2001\uad")*plain("2016: model\uad")*plain("based, 2017: extrapolated]")),bty='n',cex=0.8)
   box()
   
   ## Fig 3[c]: Prevalence by sex & age-group: 15-24 & 25-29
@@ -412,7 +416,7 @@ if (allPlots) {
   lines(c(2014.5+0.025,2014.5-0.025),c(prevalence.f.2014.age2[2],prevalence.f.2014.age2[2]),lwd=0.75)
   lines(c(2014.5+0.025,2014.5-0.025),c(prevalence.f.2014.age2[3],prevalence.f.2014.age2[3]),lwd=0.75)
   
-  xticks <- seq(2001,(2001+nyears-1),by=2)
+  xticks <- seq(2001,(2001+nyears-1)+1,by=2)
   finalYear <- (2001+nyears-1)
   axis(1,at=xticks,tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
   axis(1,at=xticks,labels=rep("",length(xticks)),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
@@ -426,7 +430,7 @@ if (allPlots) {
   text(finalYear+0.75,ypos,expression(plain("F 25\uad")*plain("29")),cex=0.8)
   ypos <- 0.025
   text(finalYear+0.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
-  ypos <- 0.037
+  ypos <- 0.04
   text(finalYear+0.75,ypos,expression(plain("M 25\uad")*plain("29")),cex=0.8)
   ypos <- 0.056
   text(finalYear+0.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
@@ -435,7 +439,7 @@ if (allPlots) {
   
   #legend("top",c("                       ACCEPt: "),cex=1,bty='n')
   legend("topright",c(expression(plain("M 16\uad")*plain("24")),expression(plain("F 16\uad")*plain("24")),expression(plain("M 25\uad")*plain("29")),expression(plain("F 25\uad")*plain("29"))),pch=c(15,19,22,21),ncol=2,bty='n',cex=1,pt.cex=c(0.8,0.8,0.9,0.9))
-  legend("bottomleft",expression(plain("[2001\uad")*plain("2013: model\uad")*plain("based, ")*plain("(2001+nyears-1)+1: extrapolated]")),bty='n',cex=0.8)
+  legend("bottomleft",expression(plain("[2001\uad")*plain("2016: model\uad")*plain("based, 2017: extrapolated]")),bty='n',cex=0.8)
   
   #legend("top",c("H06:                 "),cex=1,bty='n')
   #legend("top",c(expression(plain("F 18\uad")*plain("24"))),pch=c(8),ncol=2,bty='n',cex=1,pt.cex=c(0.9))
@@ -498,7 +502,7 @@ if (allPlots) {
   layout((c(1,2)))
   par(mai=c(0.45,0.90,0.10,0.10),cex=0.7)
   
-  maxy <- 1.5
+  maxy <- 2
   
   plot(-100,-100,xlim=c(2001,(2001+nyears-1)+1),ylim=c(0,maxy*10^5),xlab="",ylab="",xaxt='n',yaxt='n')
   
@@ -550,27 +554,27 @@ if (allPlots) {
   xy.high <- smooth.spline(seq(2001,(2001+nyears-1)),y.high)
   polygon(c(seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01),rev(seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))),c(predict(xy.low,seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))$y,rev(predict(xy.high,seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))$y)),dens=30,lwd=0.5,angle=-45,col="grey15",border="transparent",lty="12")
   
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),labels=c("","","","","","",""),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
+  axis(1,at=xaxis,tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
+  axis(1,at=xaxis,labels=rep("",length(xaxis)),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Estimated annual number of incident",side=2,line=4.8,cex=0.9)
   mtext("chlamydia cases",side=2,line=3.55,cex=0.9)
-  axis(2,las=2,at=c(0,0.5,1,1.5,2,2.5)*10^5,labels=c("             0"," 50,000"," 100,000","150,000"," 200,000",""),tck=-0.0075,hadj=0.8,cex.axis=1,lwd.ticks=0.5)
+  axis(2,las=2,at=c(0,0.5,1,1.5,2)*10^5,labels=c("             0"," 50,000"," 100,000","150,000"," 200,000"),tck=-0.0075,hadj=0.8,cex.axis=1,lwd.ticks=0.5)
   axis(2,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5)*10^5,labels=c("            ","","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
   axis(4,las=2,at=c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5)*10^5,labels=c("            ","","","","","","","","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Year",side=1,line=1.65,cex=0.9)
   
-  ypos <- 0.52*10^5
-  text(2013.75,ypos,expression(plain("F 25+")),cex=0.8)
+  ypos <- 0.38*10^5
+  text(finalYear + 0.75,ypos,expression(plain("F 25+")),cex=0.8)
   ypos <- 0.655*10^5
-  text(2013.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
+  text(finalYear + 0.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
   ypos <- 1.35*10^5
-  text(2013.75,ypos,expression(plain("M 25+")),cex=0.8)
+  text(finalYear + 0.75,ypos,expression(plain("M 25+")),cex=0.8)
   ypos <- 0.905*10^5
-  text(2013.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
+  text(finalYear + 0.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
   
   legend("topleft","95% CIs",bty='n',cex=1)
   
-  legend("bottomleft",expression(plain("[2001\uad")*plain("2013: model\uad")*plain("based, ")*plain("2013: extrapolated]")),bty='n',cex=0.8)
+  legend("bottomleft",expression(plain("[2001\uad")*plain("2016: model\uad")*plain("based, ")*plain("2017: extrapolated]")),bty='n',cex=0.8)
   
   
   ## Fig 4[b]: Incidence percentage by sex & age-group: 15-24 & 25+
@@ -626,8 +630,8 @@ if (allPlots) {
   xy.high <- smooth.spline(seq(2001,(2001+nyears-1)),y.high)
   polygon(c(seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01),rev(seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))),c(predict(xy.low,seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))$y,rev(predict(xy.high,seq((2001+nyears-1),(2001+nyears-1)+1,by=0.01))$y)),dens=30,lwd=0.5,angle=-45,col="grey15",border="transparent",lty="12")
   
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
-  axis(1,at=c(2001,2003,2005,2007,2009,2011,2013),labels=c("","","","","","",""),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
+  axis(1,at=xaxis,tck=-0.0075,padj=-1.4,cex.axis=1,lwd.ticks=0.5)
+  axis(1,at=xaxis,labels=rep("", length(xaxis)),tck=0.0075,padj=-1.7,cex.axis=0.8,lwd.ticks=0.5)
   mtext("Annual incidence (%)",side=2,line=2.4,cex=0.9)
   axis(2,las=2,at=seq(0,0.125,by=0.025),labels=c("     0","  2.5","     5","  7.5"," 10.0"," 12.5"),tck=-0.0075,hadj=0.6,cex.axis=1,lwd.ticks=0.5)
   axis(2,las=2,at=seq(0,0.125,by=0.025),labels=c("    ","  ","   ","","",""),tck=0.0075,hadj=0.6,cex.axis=0.8,lwd.ticks=0.5)
@@ -635,17 +639,17 @@ if (allPlots) {
   mtext("Year",side=1,line=1.65,cex=0.9)
   
   ypos <- 0.0018
-  text(2013.75,ypos,expression(plain("F 25+")),cex=0.8)
+  text(finalYear + 0.75,ypos,expression(plain("F 25+")),cex=0.8)
   ypos <- 0.04325
-  text(2013.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
-  ypos <- 0.024
-  text(2013.75,ypos,expression(plain("M 25+")),cex=0.8)
-  ypos <- 0.083
-  text(2013.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
+  text(finalYear + 0.75,ypos,expression(plain("F 15\uad")*plain("24")),cex=0.8)
+  ypos <- 0.015
+  text(finalYear + 0.75,ypos,expression(plain("M 25+")),cex=0.8)
+  ypos <- 0.08
+  text(finalYear + 0.75,ypos,expression(plain("M 15\uad")*plain("24")),cex=0.8)
   
   legend("topleft","95% CIs",bty='n',cex=1)
   
-  legend("bottomleft",expression(plain("[2001\uad")*plain("2013: model\uad")*plain("based, ")*plain("2013: extrapolated]")),bty='n',cex=0.8)
+  legend("bottomleft",expression(plain("[2001\uad")*plain("2016: model\uad")*plain("based, ")*plain("2017: extrapolated]")),bty='n',cex=0.8)
   
   dev.off()
   

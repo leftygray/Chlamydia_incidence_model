@@ -51,6 +51,8 @@ output/*
 !output/figures/
 output/figures/*
 !output/figures/Chlamydia_Incidence.csv
+!output/figures/Chlamydia_Incidence-2016_paper.csv
+!output/figures/figs-2016_paper/*.pdf
 
 Sex Transm Infect-2015-Ali-sextrans-2014-051631.pdf
 data/temp/
