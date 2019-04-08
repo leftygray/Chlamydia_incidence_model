@@ -80,7 +80,7 @@ if (allPlots) {
   
   setEPS()
   if (plotpdf) {
-    pdf(file.path(outputFolder,"fig3.pdf"),width=6,height=3.267*2)
+    pdf(file.path(outputFolder,"fig3.pdf"),width=6,height=3.267*3)
   } else {
     postscript(file.path(outputFolder,"fig3.eps"),width=6,height=3.267*3)
   }
@@ -494,7 +494,7 @@ if (allPlots) {
   # Create plot
   setEPS()
   if (plotpdf) {
-    pdf(file.path(outputFolder,"fig4.pdf"),width=12,height=3.267*2)
+    pdf(file.path(outputFolder,"fig4.pdf"),width=6,height=3.267*2)
   } else {
     postscript(file.path(outputFolder,"fig4.eps"),width=6,height=3.267*2)
   }
