@@ -53,6 +53,8 @@ Contains all the input data files (collated from publicly available data) used b
 
 Contains output directories storing the results produced by the main directory scripts and associated figures. Each run/source of `abc.run.abc.R` produces a folder with the date and time of running. These output directories need to be managed by the user. 
 
+Results and figures for the Australian Chlamydia Cascade paper are stored in a separate file and sub-directory within the `output/figures/` directory. 
+
 ### Instructions for running the model ###
 
 Running the model and its input/output requires some management by the user. Requiring some familiarity with the R language and the use of CSV files. The code is not so sophisticated that it can take care of everything automatically and the user should perform sanity checks along the way to test whether the contents of any given file have actually been read in or not.
