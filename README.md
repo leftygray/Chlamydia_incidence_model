@@ -2,7 +2,7 @@
 
 This project contains the code for a model to estimate trends in chlamydia incidence in Australia. The code implements a Bayesian statistical method based on a decision-pathway model producing estimates for chlamydia incidence in Australia since 2001 for male and female 16–29-year-olds. 
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2187723.svg)](https://doi.org/10.5281/zenodo.2187723)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2631989.svg)](https://doi.org/10.5281/zenodo.2631989)
 
 The original code was developed for the paper: 
 
