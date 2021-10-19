@@ -42,7 +42,7 @@ Contains all the specific R functions used in the analysis and by the main direc
 
 #### data ####
 
-Contains all the input data files (collated from publicly available data) used by the `abc.run.abc.R` script. These files are stored as `.csv` files containing data since 2001 to the year of analysis (currently 2017). Four input files are required for the model to run:
+Contains all the input data files (collated from publicly available data) used by the `abc.run.abc.R` script. These files are stored as `.csv` files containing data since 2001 to the year of analysis (currently 2020). Four input files are required for the model to run:
 
 - `priors.csv`:  Specifications for prior distributions describing constant parameters for all sub-populations.
 - `population.csv`: Estimated population size for males, females and overall for each age from 0 to 100 years for each year since 2001.  
@@ -66,5 +66,20 @@ To run the model perform the following steps:
 3. Edit lines 6-7 in `abc.run.abc.R` to have the correct output date and time and simulation number (final saved run of `abc.run.abc.R`) and then source. This produces the posterior estimates for chlamydia notifications, test counts, incidence counts and proportions, positivity, and prevalence and produces a `posteriors.dat` output file in associated output directory. This script should run until it stops (probably taking an hour). 
 4. Source `abc.plot.results.R` to generate the plots and incidence results. 
 
-Please contact Richard Gray (Rgray@kirby.unsw.edu.au) or Ewan Cameron (dr.ewan.cameron@gmail.com) if you have trouble running or deciphering the code. 
-  
+Please contact Richard Gray (Rgray@kirby.unsw.edu.au) or Ewan Cameron (dr.ewan.cameron@gmail.com) if you have trouble running or deciphering the code.
+
+### Publications ###
+
+The following publications are associated with this project and used the code in
+this repository to generate the results. 
+
+- The Kirby Institute. HIV, viral hepatitis and sexually transmissible infections in Australia: Annual Surveillance Report. The Kirby Institute, UNSW Australia, Sydney NSW 2052.
+	- For the years 2015-2019. Available from the [Kirby Institute website](https://kirby.unsw.edu.au/report-type/annual-surveillance-reports).
+    - The code was used to produce annual incidence estimates for the Australian Chlamydia cascade.
+<br></br>
+-RT Gray, D Callander, JS Hocking, S McGregor, H McManus, A Dyda, C Moreira, et al. Population-Level Diagnosis and Care Cascade for Chlamydia in Australia. Sexually Transmitted Infections 2020, 96:131–36. https://doi.org/10.1136/sextrans-2018-053801.
+    - The code was used to produce annual incidence estimates reported in the publication.
+    - Published results produced using [version v1.1](https://github.com/leftygray/Chlamydia_incidence_model/releases/tag/v1.1); doi:[10.5281/zenodo.2631989](http://doi.org/10.5281/zenodo.2631989)
+
+
+
