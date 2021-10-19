@@ -50,10 +50,12 @@ data/Raw\ data/
 output/*
 !output/figures/
 output/figures/*.*
+output/figures/CT-2019/
 !output/figures/Chlamydia_Incidence.csv
 !output/figures/Chlamydia_Incidence-2016_paper.csv
 #!output/figures/figs-2016_paper/
 Sex Transm Infect-2015-Ali-sextrans-2014-051631.pdf
+data/gono_test/
 data/temp/
 data/Original_2012_data/
 data/Original_2013_data/
@@ -64,8 +66,11 @@ data/2016_inputs/
 data/2017_inputs/
 data/2018_inputs/
 data/2019_inputs/
+data/2020_inputs/
+data/2021_inputs/
 data/!Raw_data/
 .Rhistory
 .RData
 Instructions.txt
 .Rproj.user
+NG_plots.R

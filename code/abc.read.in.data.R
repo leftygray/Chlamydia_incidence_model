@@ -13,6 +13,7 @@
 
 # population.data <- read.xlsx("data/population.xlsx",sheetIndex=1,colIndex=c(1:202),rowIndex=c(1:13),header=F)
 # population.data <- read_excel("data/population.xlsx")
+# population.data <- read.csv("data/population-ng.csv")
 population.data <- read.csv("data/population.csv")
 population.data <- unname(as.matrix(population.data[,2:ncol(population.data)]))
 
@@ -74,6 +75,7 @@ f.35.plus <- rowSums(f.population[,36:101])
 # nndss.data <- read.xlsx("data/notifications.xlsx",sheetIndex=1,colIndex=c(1:66),header=F) 
 # nndss.data <- read_excel("data/notifications.xlsx", col_names = FALSE)
 nndss.data <- read.csv("data/notifications.csv")
+# nndss.data <- read.csv("data/notifications-ng.csv")
 
 ## Notification counts available for 0-14/15-19/20-24/25-29/30-34/35+
 # notifications.m <- matrix(as.numeric(t(as.matrix(nndss.data[4:15,1:6]))),nrow=6) # this manipulation is needed because R reads this data initially as character strings (owing to the missing entries in the testing data)
@@ -93,6 +95,7 @@ notifications.f <- matrix(as.numeric(t(as.matrix(nndss.data[,9:14]))), nrow = 6)
 
 ## Testing counts available for 0-14/15-24/25-34/35+
 tests.data <- read.csv("data/tests.csv")
+# tests.data <- read.csv("data/tests-ng.csv")
 
 # tested.m <- matrix(0,nrow=4,ncol=12)
 # for (i in 1:4) {for (j in 1:12) {tested.m[i,j] <- as.numeric(as.character(nndss.data[j+3,i+14]))}}
@@ -110,3 +113,4 @@ tested.f <- matrix(as.numeric(t(as.matrix(tests.data[,7:10]))), nrow = 4)
 # tested.new.f[,1:12] <- tested.f
 # tested.new.f[,13] <- tested.2013.f
 # tested.f <- tested.new.f
+

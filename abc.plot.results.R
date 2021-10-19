@@ -5,7 +5,7 @@
 # User specifications --------------------------------------------------------- 
 
 # User specified output folder for processing
-outputData <- "2018-12-03 09-52-47"  # User specified date folder
+outputData <- "2021-07-22 22-53-59"  # User specified date folder
 
 # Output folder - assuming correct working directory has been set
 outputFolder <- file.path(getwd(),"output","figures")
@@ -16,6 +16,9 @@ plotpdf <- TRUE
 
 # Specify doing all plots 
 allPlots <- TRUE
+
+# Start year
+startYear <- 2010 # NG: 2010 CT: 2001 
 
 # Run main script -------------------------------------------------------------
 
@@ -34,8 +37,8 @@ if (allPlots) {
   source("code/abc.read.in.data.R") # there will be 16 warnings here; these can be ignored ... they are due to the missing data in the NNDSS test counts
 
    # Plot specifications
-   xaxis <- seq(2001, (2001+nyears-1) + 1, by = 2)
-  
+   xaxis <- seq(startYear, (startYear+nyears-1) + 1, by = 2)
+
   ## Fig 2: Raw Data
   setEPS()
   
@@ -48,17 +51,17 @@ if (allPlots) {
   #
   par(mai=c(0.45,0.7,0.1,0.77),cex=0.7)
   
-  plot(-100,-100,xlim=c(2001,(2001+nyears-1)+1),ylim=c(0,10*10^4),xlab="",ylab="",xaxt='n',yaxt='n')
+  plot(-100,-100,xlim=c(startYear,(startYear+nyears-1)+1),ylim=c(0,10*10^4),xlab="",ylab="",xaxt='n',yaxt='n')
   
-  points(2001:(2001+nyears-1),notifications.m[2,]+notifications.m[3,]+notifications.m[4,]+notifications.m[5,]+notifications.m[6,],pch=24,cex=0.95,col="grey15",bg="grey15")
-  lines(2001:(2001+nyears-1),notifications.m[2,]+notifications.m[3,]+notifications.m[4,]+notifications.m[5,]+notifications.m[6,],lwd=0.75,col="grey15")
-  points(2001:(2001+nyears-1),notifications.f[2,]+notifications.f[3,]+notifications.f[4,]+notifications.f[5,]+notifications.f[6,],pch=23,cex=1.2,col="grey89",bg="grey89")
-  lines(2001:(2001+nyears-1),notifications.f[2,]+notifications.f[3,]+notifications.f[4,]+notifications.f[5,]+notifications.f[6,],lwd=0.75,col="grey89")
+  points(startYear:(startYear+nyears-1),notifications.m[2,]+notifications.m[3,]+notifications.m[4,]+notifications.m[5,]+notifications.m[6,],pch=24,cex=0.95,col="grey15",bg="grey15")
+  lines(startYear:(startYear+nyears-1),notifications.m[2,]+notifications.m[3,]+notifications.m[4,]+notifications.m[5,]+notifications.m[6,],lwd=0.75,col="grey15")
+  points(startYear:(startYear+nyears-1),notifications.f[2,]+notifications.f[3,]+notifications.f[4,]+notifications.f[5,]+notifications.f[6,],pch=23,cex=1.2,col="grey89",bg="grey89")
+  lines(startYear:(startYear+nyears-1),notifications.f[2,]+notifications.f[3,]+notifications.f[4,]+notifications.f[5,]+notifications.f[6,],lwd=0.75,col="grey89")
   
-  points(2001:(2001+nyears-1),(tested.m[2,]+tested.m[3,]+tested.m[4,])/10,pch=24,cex=0.95,col="grey45")
-  lines(2001:(2001+nyears-1),(tested.m[2,]+tested.m[3,]+tested.m[4,])/10,lwd=0.75,col="grey45")
-  points(2001:(2001+nyears-1),(tested.f[2,]+tested.f[3,]+tested.f[4,])/10,pch=23,cex=1.2,col="grey79")
-  lines(2001:(2001+nyears-1),(tested.f[2,]+tested.f[3,]+tested.f[4,])/10,lwd=0.75,col="grey79")
+  points(startYear:(startYear+nyears-1),(tested.m[2,]+tested.m[3,]+tested.m[4,])/10,pch=24,cex=0.95,col="grey45")
+  lines(startYear:(startYear+nyears-1),(tested.m[2,]+tested.m[3,]+tested.m[4,])/10,lwd=0.75,col="grey45")
+  points(startYear:(startYear+nyears-1),(tested.f[2,]+tested.f[3,]+tested.f[4,])/10,pch=23,cex=1.2,col="grey79")
+  lines(startYear:(startYear+nyears-1),(tested.f[2,]+tested.f[3,]+tested.f[4,])/10,lwd=0.75,col="grey79")
   
   legend("topleft",c("Notifications","","","Tests","",""),pch=c(19,24,23,19,24,23),ncol=2,bty='n',cex=1,pt.cex=c(1,0.95,1.2,1,0.95,1.2),col="white",pt.bg="white")
   legend("topleft",c("","Males","Females      ","","Males","Females"),pch=c(19,24,23,19,24,23),ncol=2,bty='n',cex=1,pt.cex=c(1,0.95,1.2,1,0.95,1.2),col=c("transparent","grey15","grey89","transparent","grey45","grey79"),pt.bg=c("transparent","grey15","grey89","transparent","white","white"),adj=c(0,0.45))

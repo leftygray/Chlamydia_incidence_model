@@ -16,6 +16,7 @@
 
 # hyperparameters <- read_excel("data/priors.xlsx", skip = 1) 
 hyperparameters <- read.csv("data/priors.csv")
+#hyperparameters <- read.csv("data/priors-ng.csv")
 hyperparameters <- hyperparameters[,2:ncol(hyperparameters)]
 
 prior.mvn.inf <- c(as.numeric(hyperparameters[10,1]),as.numeric(hyperparameters[11,1]),as.numeric(hyperparameters[12,1]),as.numeric(hyperparameters[13,1]))
