@@ -5,7 +5,7 @@
 # User specifications --------------------------------------------------------- 
 
 # User specified output folder for processing
-outputData <- "2021-07-22 22-53-59"  # User specified date folder
+outputData <- "2021-10-19 21-50-08"  # User specified date folder
 
 # Output folder - assuming correct working directory has been set
 outputFolder <- file.path(getwd(),"output","figures")
