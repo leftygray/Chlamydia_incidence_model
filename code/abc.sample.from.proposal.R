@@ -18,19 +18,19 @@ simulate.from.proposal <- function(Nsim,mean.cov.master) {
   theta[,1:9] <- rtmvnorm(Nsim,mean=mean.cov.master$means[[1]],sigma=mean.cov.master$covs[[1]],lower=rep(0,9),upper=rep(1,9))
   
   # draw the MVN infection model
-  sgp <- rmvnorm(Nsim,mean=mean.cov.master$means[[2]],sigma=mean.cov.master$covs[[2]])
+  sgp <- mvtnorm::rmvnorm(Nsim,mean=mean.cov.master$means[[2]],sigma=mean.cov.master$covs[[2]])
   tsgp <- exp(sgp)/(1+exp(sgp))
   theta[,(9+1):(9+nyears*6)] <- tsgp # infection matrix for males
-  sgp <- rmvnorm(Nsim,mean=mean.cov.master$means[[3]],sigma=mean.cov.master$covs[[3]])
+  sgp <- mvtnorm::rmvnorm(Nsim,mean=mean.cov.master$means[[3]],sigma=mean.cov.master$covs[[3]])
   tsgp <- exp(sgp)/(1+exp(sgp))
   theta[,((9+nyears*6)+1):(9+nyears*6*2)] <- tsgp # infection matrix for females
   
   # draw the MVN screening model
-  sgp <- rmvnorm(Nsim,mean=mean.cov.master$means[[4]],sigma=mean.cov.master$covs[[4]])
+  sgp <- mvtnorm::rmvnorm(Nsim,mean=mean.cov.master$means[[4]],sigma=mean.cov.master$covs[[4]])
   tsgp <- exp(sgp)/(1+exp(sgp))
   theta[,(9+nyears*6*2+1):(9+nyears*6*3)] <- tsgp # screening matrix for males
   
-  sgp <- rmvnorm(Nsim,mean=mean.cov.master$means[[5]],sigma=mean.cov.master$covs[[5]])
+  sgp <- mvtnorm::rmvnorm(Nsim,mean=mean.cov.master$means[[5]],sigma=mean.cov.master$covs[[5]])
   tsgp <- exp(sgp)/(1+exp(sgp))
   theta[,(9+nyears*6*3+1):(9+nyears*6*4)] <- tsgp # screening matrix for females
   

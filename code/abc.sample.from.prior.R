@@ -38,10 +38,10 @@ simulate.from.prior <- function(Nsim) {
   # the fields package
 # p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.inf[2],range=prior.mvn.inf[3],smoothness=prior.mvn.inf[4])
   p <- prior.mvn.inf[2] * Matern(as.matrix(dist(z,diag=T,upper=T)), range=prior.mvn.inf[3],smoothness=prior.mvn.inf[4])
-  sgp <- rmvnorm(Nsim,mean=rep(prior.mvn.inf[1],nyears*6),Sigma=p)
+  sgp <- mvtnorm::rmvnorm(Nsim,mean=rep(prior.mvn.inf[1],nyears*6),sigma=p)
   tsgp <- exp(sgp)/(1+exp(sgp)) # logistic transformation to a probability between 0 and 1
   theta[,(9+1):(9+nyears*6)] <- tsgp # infection matrix for males
-  sgp <- rmvnorm(Nsim,mean=rep(prior.mvn.inf[1],nyears*6),Sigma=p)
+  sgp <- mvtnorm::rmvnorm(Nsim,mean=rep(prior.mvn.inf[1],nyears*6),sigma=p)
   tsgp <- exp(sgp)/(1+exp(sgp)) # logistic transformation to a probability between 0 and 1
   theta[,((9+nyears*6)+1):(9+nyears*6*2)] <- tsgp # infection matrix for females
   
@@ -58,10 +58,10 @@ simulate.from.prior <- function(Nsim) {
   # the fields package
   # p <- Matern(as.matrix(dist(z,diag=T,upper=T)),scale=prior.mvn.screening[2],range=prior.mvn.screening[3],smoothness=prior.mvn.screening[4])
   p <- prior.mvn.screening[2] * Matern(as.matrix(dist(z,diag=T,upper=T)),range=prior.mvn.screening[3],smoothness=prior.mvn.screening[4])
-  sgp <- rmvnorm(Nsim,mean=rep(prior.mvn.screening[1],nyears*6),Sigma=p)
+  sgp <- mvtnorm::rmvnorm(Nsim,mean=rep(prior.mvn.screening[1],nyears*6),sigma=p)
   tsgp <- exp(sgp)/(1+exp(sgp)) # logistic transformation to a probability between 0 and 1
   theta[,(9+nyears*6*2+1):(9+nyears*6*3)] <- tsgp # screening matrix for males
-  sgp <- rmvnorm(Nsim,mean=rep(prior.mvn.screening[1],nyears*6),Sigma=p)
+  sgp <- mvtnorm::rmvnorm(Nsim,mean=rep(prior.mvn.screening[1],nyears*6),sigma=p)
   tsgp <- exp(sgp)/(1+exp(sgp)) # logistic transformation to a probability between 0 and 1
   theta[,(9+nyears*6*3+1):(9+nyears*6*4)] <- tsgp # screening matrix for females
   
